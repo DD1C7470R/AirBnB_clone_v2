@@ -67,7 +67,7 @@ FOUR="Ceci n'est pas une page"
 ERRORREDIRECT="\n\terror_page 404 /404error.html;\n\tlocation = /404error.html {\n\t\troot /usr/share/nginx/html;\n\t\tinternal;\n\t\tadd_header X-Served-By $HOSTNAME;\n\t}\n"
 
 
-hbnb_static_serve="\n\tlocation = /hbnb_static {\n\t\talias /data/web_static/current;\n\t\tadd_header X-Served-By $HOSTNAME;\n\t}\n"
+hbnb_static_serve="\n\tlocation /hbnb_static {\n\t\talias /data/web_static/current;\n\t\tadd_header X-Served-By $HOSTNAME;\n\t}\n"
 
 
 echo "Helo World!" > "/var/www/html/index.nginx-debian.html"
