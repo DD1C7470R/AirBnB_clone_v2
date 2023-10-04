@@ -47,18 +47,17 @@ else
         ln -s "/data/web_static/releases/test/" "/data/web_static/current"
 fi
 
-sudo chown -R $USER:ubuntu "/data"
+sudo chown -R "$USER":ubuntu "/data"
 
 
 # Get the hostname of the server
 HOSTNAME=$(hostname)
 
 # Define the Nginx configuration file path
-NGINX_CONF_PATH="/etc/nginx/sites-available/default"
 
-sudo chown -R $USER:$USER "/etc/nginx"
-sudo chown -R $USER:$USER "/var/www"
-sudo chown -R $USER:$USER "/usr/share/nginx/html"
+sudo chown -R "$USER:$USER" "/etc/nginx"
+sudo chown -R "$USER:$USER" "/var/www"
+sudo chown -R "$USER:$USER" "/usr/share/nginx/html"
 
 REDIRECT="\n\tlocation /redirect_me {\n\t\treturn 301 http://dev-israel.tech;\n\t\tadd_header X-Served-By $HOSTNAME;\n\t}\n"
 FILE="/etc/nginx/sites-available/default"
@@ -68,7 +67,6 @@ FOUR="Ceci n'est pas une page"
 ERRORREDIRECT="\n\terror_page 404 /404error.html;\n\tlocation = /404error.html {\n\t\troot /usr/share/nginx/html;\n\t\tinternal;\n\t\tadd_header X-Served-By $HOSTNAME;\n\t}\n"
 
 
-hbnb_static_file="/data/web_static/current"
 hbnb_static_serve="\n\tlocation = /hbnb_static {\n\t\talias /data/web_static/current;\n\t\tadd_header X-Served-By $HOSTNAME;\n\t}\n"
 
 
@@ -79,9 +77,6 @@ echo "$FOUR" > "$ERRORFILE"
 sed -i "37i\ $ERRORREDIRECT" "$FILE"
 
 #sudo sed -i "33i\ \n\t\tadd_header X-Served-By $HOSTNAME;\n\t" "$FILE"
-hbnb_static_path="/var/www/html/hbnb_static"
 
 
 sudo service nginx restart
-
-
