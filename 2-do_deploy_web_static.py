@@ -4,7 +4,7 @@ from fabric.api import *
 import os.path
 
 env.user = 'ubuntu'
-env.hosts = ["100.24.237.31", "100.25.129.126"]
+env.hosts = ["18.235.248.71", "54.146.78.208"]
 env.key_filename = "~/school"
 
 
