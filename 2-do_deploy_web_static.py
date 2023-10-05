@@ -3,27 +3,47 @@
 from fabric.api import *
 import os.path
 
-env.user = 'ubuntu'
+#env.user = 'ubuntu'
 env.hosts = ["18.235.248.71", "54.146.78.208"]
-env.key_filename = "~/id_rsa"
+#env.key_filename = "~/id_rsa"
 
-
+@task
 def do_deploy(archive_path):
-    """distributes an archive to your web servers
-    """
-    if os.path.exists(archive_path) is False:
-        return False
+    """Fabric script that distributes an archive to web servers"""
     try:
-        arc = archive_path.split("/")
-        base = arc[1].strip('.tgz')
-        put(archive_path, '/tmp/')
-        sudo('mkdir -p /data/web_static/releases/{}'.format(base))
-        main = "/data/web_static/releases/{}".format(base)
-        sudo('tar -xzf /tmp/{} -C {}/'.format(arc[1], main))
-        sudo('rm /tmp/{}'.format(arc[1]))
-        sudo('mv {}/web_static/* {}/'.format(main, main))
-        sudo('rm -rf /data/web_static/current')
-        sudo('ln -s {}/ "/data/web_static/current"'.format(main))
+        with_ext = archive_path.split("/")[-1]
+        without_ext = archive_path.split("/")[-1].split(".")[0]
+        put(archive_path, "/tmp")
+        run("mkdir -p /data/web_static/releases/" + without_ext)
+        run(
+            "tar -xzf /tmp/"
+            + with_ext + " -C /data/web_static/releases/"
+            + without_ext
+        )
+        run("rm /tmp/" + with_ext)
+        run(
+            "mv /data/web_static/releases/"
+            + without_ext
+            + "/web_static/* /data/web_static/releases/"
+            + without_ext
+        )
+        run("rm -rf /data/web_static/releases/"
+            + without_ext + "/web_static")
+        run("rm -rf /data/web_static/current")
+        run(
+            "ln -s /data/web_static/releases/"
+            + without_ext
+            + "/ /data/web_static/current"
+        )
         return True
-    except:
+    except Exception:
         return False
+
+
+@task
+def do_pack():
+    """generates a .tgz archive from web_static"""
+    local(
+        "mkdir versions ; tar -cvzf \
+versions/web_static_$(date +%Y%m%d%H%M%S).tgz web_static/"
+    )
