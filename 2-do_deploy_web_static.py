@@ -3,9 +3,11 @@
 from fabric.api import *
 import os.path
 
-#env.user = 'ubuntu'
+
+# env.user = 'ubuntu'
 env.hosts = ["18.235.248.71", "54.146.78.208"]
-#env.key_filename = "~/id_rsa"
+# env.key_filename = "~/id_rsa"
+
 
 @task
 def do_deploy(archive_path):
