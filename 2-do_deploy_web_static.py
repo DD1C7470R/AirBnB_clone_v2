@@ -6,8 +6,7 @@ import os.path
 
 env.user = 'ubuntu'
 env.hosts = ["18.235.248.71", "54.146.78.208"]
-env.key_filename = sys.argv[2]
-print(sys.argv[2])
+env.key_filename = sys.argv[5]
 
 
 def do_deploy(archive_path):
