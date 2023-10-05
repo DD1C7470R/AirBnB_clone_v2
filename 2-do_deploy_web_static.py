@@ -2,10 +2,11 @@
 """web server distribution"""
 from fabric.api import *
 import os.path
+import sys
 
 env.user = 'ubuntu'
 env.hosts = ["18.235.248.71", "54.146.78.208"]
-env.key_filename = "~/.ssh/school"
+env.key_filename = sys.argv[5]
 
 
 def do_deploy(archive_path):
