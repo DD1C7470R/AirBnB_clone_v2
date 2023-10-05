@@ -2,7 +2,7 @@
 """web server distribution"""
 from fabric.api import *
 import os.path
-
+from fabric.decorators import task
 
 # env.user = 'ubuntu'
 env.hosts = ["18.235.248.71", "54.146.78.208"]
