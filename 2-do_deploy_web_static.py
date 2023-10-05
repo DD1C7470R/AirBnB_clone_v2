@@ -2,20 +2,6 @@
 """web server distribution"""
 from fabric.api import *
 import os.path
-import argparse
-
-parser = argparse.ArgumentParser()
-parser.add_argument("archive_path", help="Path to the archive file")
-parser.add_argument("-u", "--ssh-user", required=True, help="SSH username")
-args = parser.parse_args()
-
-env.user = args.ssh_user  # Use the SSH username provided as an argument
-
-# Check if an SSH key file was provided as an argument
-if "keyfile" in env:
-    env.key_filename = env.keyfile
-else:
-    env.key_filename = "~/.ssh/school"
 
 env.hosts = ["18.235.248.71", "54.146.78.208"]
 
