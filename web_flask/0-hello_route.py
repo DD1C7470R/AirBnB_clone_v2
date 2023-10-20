@@ -7,7 +7,7 @@ Routes:'''
 from web_flask import app
 
 
-@app.route('/')
+@app.route('/', strict_slashes=False)
 def hello_bnb():
     '''returns hello bnb'''
     return "Hello HBNB!"
