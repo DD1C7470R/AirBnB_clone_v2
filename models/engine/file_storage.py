@@ -14,6 +14,8 @@ class FileStorage:
             print_obj = {}
             for key, value in FileStorage.__objects.items():
                 if value.__class__ == cls:
+                    if '_sa_instance_state' in value.__dict__:
+                        del value.__dict__['_sa_instance_state']
                     print_obj[key] = value
             return print_obj
         return FileStorage.__objects

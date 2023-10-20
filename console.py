@@ -234,7 +234,6 @@ class HBNBCommand(cmd.Cmd):
         else:
             for k, v in storage.all().items():
                 v.__dict__ = v.to_dict()
-                print('============>', v.__dict__)
                 print_list.append(str(v))
 
         print(print_list)
