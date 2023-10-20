@@ -9,10 +9,12 @@ from sqlalchemy.orm import relationship
 class State(BaseModel, Base):
     """ State class """
     __tablename__ = "states"
-    name = Column('name', String(128), nullable=False)
-    cities = relationship("City", back_populates="state")
+    if os.environ.get("HBNB_TYPE_STORAGE") == 'db':
+        name = Column('name', String(128), nullable=False)
+        cities = relationship("City", back_populates="state")
 
-    if os.environ.get("HBNB_TYPE_STORAGE") != 'db':
+    else:
+        name = ""
         @property
         def cities(self):
             from models.__init__ import storage

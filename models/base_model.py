@@ -1,5 +1,6 @@
 #!/usr/bin/python3
 """This module defines a base class for all models in our hbnb clone"""
+import os
 import uuid
 from datetime import datetime
 from sqlalchemy.orm import declarative_base
@@ -12,11 +13,11 @@ class BaseModel:
     """A base class for all hbnb models"""
     id = Column(String(60), nullable=False, primary_key=True)
     created_at = Column(
-            DateTime, nullable=False, server_default=str(datetime.utcnow())
-        )
+        DateTime, nullable=False, server_default=str(datetime.utcnow())
+    )
     updated_at = Column(
-            DateTime, nullable=False, server_default=str(datetime.utcnow())
-        )
+        DateTime, nullable=False, server_default=str(datetime.utcnow())
+    )
 
     def __init__(self, *args, **kwargs):
         """Instatntiates a new model"""
@@ -41,7 +42,12 @@ class BaseModel:
     def __str__(self):
         """Returns a string representation of the instance"""
         cls = (str(type(self)).split('.')[-1]).split('\'')[0]
-        return '[{}] ({}) {}'.format(cls, self.id, self.__dict__)
+        temp = {}
+        for key, val in self.__dict__.items():
+            temp[key] = val
+        if "_sa_instance_state" in temp:
+            del temp["_sa_instance_state"]
+        return '[{}] ({}) {}'.format(cls, self.id, temp)
 
     def save(self):
         """Updates updated_at with current time when instance is changed"""
