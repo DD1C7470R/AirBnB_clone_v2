@@ -28,7 +28,7 @@ def display_c_is_fun(text):
 
 
 @app.route('/python/<text>')
-def display_c_is_fun(text='cool'):
+def display_python(text='cool'):
     return f"C {escape(text).replace('_', ' ')}"
 
 
