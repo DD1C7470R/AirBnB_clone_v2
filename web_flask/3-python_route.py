@@ -29,7 +29,7 @@ def display_c_is_fun(text):
 
 @app.route('/python/<text>')
 def display_python(text='cool'):
-    return f"C {escape(text).replace('_', ' ')}"
+    return f"Python {escape(text).replace('_', ' ')}"
 
 
 if __name__ == "__main__":
