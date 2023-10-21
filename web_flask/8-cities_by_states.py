@@ -74,11 +74,11 @@ def cities_state_list():
     from models.city import City
 
     proc_states = []
-    proc_cities = []
     city_by_state = {}
     states = storage.all(State)
-    for key, state  in states.items():
+    for key, state in states.items():
         proc_states.append(state)
+        proc_cities = []
         for key, city in storage.all(City).items():
             if state.id == city.state_id:
                 proc_cities.append(city)
@@ -96,4 +96,4 @@ def tear_down(error):
 
 
 if __name__ == "__main__":
-    app.run(host='0.0.0.0', port=5000)
+    app.run(host='0.0.0.0', port=5000, debug=True)

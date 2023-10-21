@@ -1,3 +1,4 @@
+DROP TABLE IF EXISTS reviews;
 DROP TABLE IF EXISTS place_amenity;
 DROP TABLE IF EXISTS places;
 DROP TABLE IF EXISTS amenities;

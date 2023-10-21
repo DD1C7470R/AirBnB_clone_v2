@@ -1,4 +1,4 @@
-#!/usr/bin/python3
+!§/usr/bin/python3
 """ Test delete feature
 """
 from models.engine.file_storage import FileStorage
