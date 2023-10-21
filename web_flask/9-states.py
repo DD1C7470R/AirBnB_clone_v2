@@ -54,6 +54,7 @@ def number_odd_or_even(n):
     return render_template('6-number_odd_or_even.html', num=num)
 
 
+@app.route('/states')
 @app.route('/states_list')
 def state_list():
     from models.state import State
@@ -88,7 +89,6 @@ def cities_state_list():
             states=sorted(proc_states, key=lambda x: x.name),
             cities=city_by_state
             )
-
 
 
 @app.route('/states/<id>')
