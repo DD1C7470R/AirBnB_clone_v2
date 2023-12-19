@@ -59,8 +59,7 @@ class HBNBCommand(cmd.Cmd):
                 raise Exception
 
             # if parantheses contain arguments, parse them
-            pline = pline[pline.find('(') + 1:pline.find(')')]
-            if pline:
+            if pline := pline[pline.find('(') + 1:pline.find(')')]:
                 # partition args: (<id>, [<delim>], [<*args>])
                 pline = pline.partition(', ')  # pline convert to tuple
 
@@ -70,8 +69,8 @@ class HBNBCommand(cmd.Cmd):
                 # empty quotes register as empty _id when replaced
 
                 # if arguments exist beyond _id
-                pline = pline[2].strip()  # pline is now str
-                if pline:
+# pline is now str
+                if pline := pline[2].strip():
                     # check for *args or **kwargs
                     if pline[0] == '{' and pline[-1] == '}'\
                             and type(eval(pline)) is dict:

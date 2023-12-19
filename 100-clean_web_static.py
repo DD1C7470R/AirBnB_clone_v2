@@ -15,8 +15,7 @@ def do_clean(number=0):
     with cd("/data/web_static/releases"):
         target_R = sudo("ls -t .").split()
     paths = "/data/web_static/releases"
-    number = int(number)
-    if number == 0:
+    if (number := int(number)) == 0:
         num = 1
     else:
         num = number

@@ -74,14 +74,12 @@ class DBStorage:
         self.__session = Session()
 
     def truncate_tables(self, cls, id):
-        row = self.__session.query(cls).get(id)
-        if row:
+        if row := self.__session.query(cls).get(id):
             self.__session.delete(row)
             self.__session.commit()
 
     def close_session(self):
-        row = self.__session.query(cls).get(id)
-        if row:
+        if row := self.__session.query(cls).get(id):
             self.__session.close()
 
     def close(self):
